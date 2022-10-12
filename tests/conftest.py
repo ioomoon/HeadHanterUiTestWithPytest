@@ -22,6 +22,8 @@ def get_webdriver(get_chrome_options):
 def setup(request, get_webdriver):
     driver = get_webdriver
     url = "https://hh.ru/"
+    if request.cls is not None:
+        request.cls.driver = driver
     driver.get(url)
     yield driver
-    driver.close() # .quit для закрытия полностью браузера, .close для закрытия вкладки
+    driver.quit()  # .quit для закрытия полностью браузера, .close для закрытия вкладки

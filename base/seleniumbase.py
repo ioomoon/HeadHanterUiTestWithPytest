@@ -20,7 +20,7 @@ class SeleniumBase:
                     'name': By.NAME,
                     'partial_link_text': By.PARTIAL_LINK_TEXT,
                     'tag_name': By.TAG_NAME
-            }
+                    }
         return locating[find_by]
 
     def is_visible(self, find_by: str, locator: str, locator_name: str = None) -> WebElement:
@@ -42,3 +42,8 @@ class SeleniumBase:
     def are_present(self, find_by: str, locator: str, locator_name: str = None) -> List[WebElement]:
         return self.wait.until(ec.presence_of_all_elements_located((self.__get_selenium_by(find_by), locator)),
                                locator_name)
+
+    def is_clickable(self, find_by: str, locator: str):
+        return ec.element_to_be_clickable((self.__get_selenium_by(find_by), locator))
+
+
